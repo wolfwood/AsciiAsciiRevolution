@@ -7,21 +7,19 @@ extern crate ncurses;
 
 use ncurses::*;
 use asciisprite::*;
-use animatedasciisprite::*;
 
 mod asciisprite;
-mod animatedasciisprite;
 
 fn main() {
     /* Start ncurses. */
     let win: WINDOW = initscr();
 
 
-    let logo = AsciiSprite::new("graphics/logo.txt");
+    let logo = AsciiSprite::new_static("graphics/logo.txt", false);
     logo.drawSprite();
     refresh();
 
-    let mut crongif = AnimatedAsciiSprite::new("graphics/cron-popcron.txt", true, true);
+    let mut crongif = AsciiSprite::new("graphics/cron-popcron.txt", false, true);
 
     //clear();
 
@@ -32,7 +30,7 @@ fn main() {
 
         crongif.nextFrame();
 
-        std::io::timer::sleep(1000);
+        std::io::timer::sleep(500);
     }
 
     /* Wait for a key press. */
